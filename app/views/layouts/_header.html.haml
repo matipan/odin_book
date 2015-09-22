@@ -1,0 +1,21 @@
+.navigation-bar
+  .container
+    .brand.pull-left
+      = link_to "Odin Book", root_url
+    .navigation-links
+      .pull-right
+        %ul.right-menu
+          %li
+            %a(href="#")
+              %i.fa.fa-flag
+          %li.dropdown
+            %a.dropdown-toggle(data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" href="#")
+              %i.fa.fa-user
+              %i.fa.fa-caret-down
+            %ul.dropdown-menu
+              %li
+                %a(href="#") Option
+              %li
+                %a(href="#") Option
+              %li
+                %a(href="#") Option

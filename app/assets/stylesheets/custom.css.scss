@@ -2,3 +2,73 @@
 @import "bootstrap";
 @import "font-awesome-sprockets";
 @import "font-awesome";
+
+/* Global variables and stuff */
+$dark: #424652;
+$light: #9a9da4;
+$extra-light: #E8E8E8;
+$highlight: #8bc6db;
+$highlight-1: #3399CC;
+$blue: #007bb6;
+$border: #E9E9E9;
+$red-letter: #CC0033;
+$light-grey: #F8F8F8;
+$twitter: #55acee;
+$googleplus: #dd4b39;
+$github: #333333;
+$facebook: #3b5998;
+
+.navigation-bar{
+  background-color: $facebook;
+  padding: 1.0em;
+  .brand{
+	font-size: 1.5em;
+	color: #e8e8e8;
+	a{
+	  color: $light-grey;
+	  &:hover{
+		color: #ffffff;
+		text-decoration: none;
+		background: #3a5795;
+	  }
+	}
+  }
+  background-color: #3a5795;
+  border: 0;
+  border-bottom: 1px solid #133783;
+  box-shadow: 0 2px 2px -2px rgba(0, 0, 0, .52);
+  .right-menu{
+	li{
+	  display: inline;
+	  margin: 0 3px;
+	  color: #e8e8e8;
+	}
+	margin: 0;
+	list-style: none;
+	font-size: 1.5em;
+	text-decoration: none;
+	.dropdown-menu{
+	  li{
+		margin: 0;
+	  }
+	  padding-right: 0px;
+	  a{
+		color: $dark;
+		padding: 8px;
+	  }
+	  font-size: .7em;
+	  margin-top: 15px;
+	}
+	a{
+	  color: #e8e8e8;
+	  &:hover{
+		color: #ffffff;
+		text-decoration: none;
+		background: #3a5795;
+	  }
+	  &:visited{
+		text-decoration: none;
+	  }
+	}
+  }
+}
