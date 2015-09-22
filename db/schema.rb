@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150922173358) do
+ActiveRecord::Schema.define(version: 20150922183226) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,11 @@ ActiveRecord::Schema.define(version: 20150922173358) do
   add_index "friendships", ["requester_id"], name: "index_friendships_on_requester_id", using: :btree
 
   create_table "likes", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "notifications", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -75,6 +80,7 @@ ActiveRecord::Schema.define(version: 20150922173358) do
     t.string   "profile_image_content_type"
     t.integer  "profile_image_file_size"
     t.datetime "profile_image_updated_at"
+    t.string   "gender"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
