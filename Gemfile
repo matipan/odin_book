@@ -13,15 +13,18 @@ gem 'haml',	          	'~> 4.0.7'
 gem 'haml-rails', 		'~> 0.9.0'
 gem 'paperclip', 		'~> 4.3.1'
 gem 'font-awesome-sass'
-gem 'pg'
 gem 'jquery-rails'
 gem 'turbolinks'
+gem 'pg'
 
 gem 'sdoc', 			'~> 0.4.0', group: :doc
 
 group :development, :test do
   gem 'byebug'
-  gem 'web-console', '~> 2.0'
   gem 'spring'
 end
 
+group :test do
+  gem 'minitest-reporters', '~> 1.1.1'
+  gem 'mini_backtrace', 	'~> 0.1.3'
+end
