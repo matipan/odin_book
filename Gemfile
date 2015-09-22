@@ -27,4 +27,5 @@ end
 group :test do
   gem 'minitest-reporters', '~> 1.1.1'
   gem 'mini_backtrace', 	'~> 0.1.3'
+  gem 'factory_girl', 		'~> 4.5.0'
 end
