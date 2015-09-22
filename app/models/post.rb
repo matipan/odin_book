@@ -3,6 +3,7 @@ class Post < ActiveRecord::Base
   # Associations
   has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
   belongs_to :user
+  has_many :likes
 
   # Validations
   validate :body_or_image

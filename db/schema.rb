@@ -11,13 +11,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150922164825) do
+ActiveRecord::Schema.define(version: 20150922173358) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "articles", force: :cascade do |t|
     t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.string   "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "friendships", force: :cascade do |t|
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.boolean  "friends",      default: false
+    t.integer  "requester_id"
+    t.integer  "requestee_id"
+  end
+
+  add_index "friendships", ["requestee_id"], name: "index_friendships_on_requestee_id", using: :btree
+  add_index "friendships", ["requester_id", "requestee_id"], name: "index_friendships_on_requester_id_and_requestee_id", unique: true, using: :btree
+  add_index "friendships", ["requester_id"], name: "index_friendships_on_requester_id", using: :btree
+
+  create_table "likes", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
