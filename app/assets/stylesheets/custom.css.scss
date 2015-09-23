@@ -20,10 +20,37 @@ $facebook: #3b5998;
 
 .navigation-bar{
   background-color: $facebook;
-  padding: 1.0em;
+  padding-top: 1.0em;
+  padding-bottom: 0;
   .brand{
-	font-size: 1.5em;
+	.left-menu{
+	  list-style-type: none;
+	  .main-odin{
+		font-size: 2.0em;
+	  }
+	  li{
+		display: inline;
+		margin: 0 3px;
+		color: #e8e8e8;
+	  }
+	  form{
+		input{
+		  margin-left: 5px;
+		  height: 25px;
+		}
+		button{
+		  float: right;
+		}
+		display: inline;
+		float: right;
+		margin: 0;
+	  }
+	}
+	font-size: 2.0em;
+	display: block;
 	color: #e8e8e8;
+	margin: 0;
+	padding: 0;
 	a{
 	  color: $light-grey;
 	  &:hover{
