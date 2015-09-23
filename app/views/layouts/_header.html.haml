@@ -5,21 +5,29 @@
         %li.main-odin
           %a(href="#")
             %i.fa.fa-facebook-official
-        %form(role="search")
-          %input.form-control(type="text" placeholder="Search for friends...")
+        - if user_signed_in?
+          %form(role="search")
+            %input.form-control(type="text" placeholder="Search for friends...")
+        - else
+          %li
+            %h3
+              %a(href="#") OdinBook
     .navigation-links.pull-right
-      %ul.right-menu
-        %li
-          %a(href="#")
-            %i.fa.fa-flag
-        %li.dropdown
-          %a.dropdown-toggle(data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" href="#")
-            %i.fa.fa-user
-            %i.fa.fa-caret-down
-          %ul.dropdown-menu
-            %li
-              %a(href="#") Option
-            %li
-              %a(href="#") Option
-            %li
-              %a(href="#") Option
+      - if user_signed_in?
+        %ul.right-menu
+          %li
+            %a(href="#")
+              %i.fa.fa-flag
+          %li.dropdown
+            %a.dropdown-toggle(data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" href="#")
+              %i.fa.fa-user
+              %i.fa.fa-caret-down
+            %ul.dropdown-menu
+              %li
+                %a(href="#") Option
+              %li
+                %a(href="#") Option
+              %li
+                %a(href="#") Option
+      - else
+        %a(href="#") Welcome!

@@ -14,7 +14,6 @@ class User < ActiveRecord::Base
   has_many :likes, dependent: :destroy
   has_many :notifications, dependent: :destroy
 
-
   # Validations
   validates_presence_of :name, :last_name
 end
