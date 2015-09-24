@@ -24,6 +24,8 @@ group :development, :test do
   gem 'spring'
   gem 'rspec-rails', '~> 3.3.3'
   gem 'factory_girl_rails', '~> 4.5.0'
+  gem 'guard-rspec', require: false
+  gem 'terminal-notifier-guard', '~> 1.6.1'
 end
 
 group :test do
