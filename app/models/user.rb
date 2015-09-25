@@ -6,14 +6,16 @@ class User < ActiveRecord::Base
 
   # Associations
   has_many :posts, dependent: :destroy
-  has_many :comments, dependent: :destroy
-  has_many :requested_friendships, foreign_key: :requester_id, class_name: "Friendship", dependent: :destroy
-  has_many :requested_friends, through: :requested_friends, source: :requester
-  has_many :received_friendships, foreign_key: :requestee_id, class_name: "Friendship", dependent: :destroy
+  has_many :requested_friendships, class_name: "Friendship", foreign_key: :requester_id, dependent: :destroy
+  has_many :friends, through: :requested_friendships, source: :requester
+  has_many :received_friendships, class_name: "Friendship", foreign_key: :requestee_id, dependent: :destroy
   has_many :received_friends, through: :received_friendships, source: :requestee
-  has_many :likes, dependent: :destroy
-  has_many :notifications, dependent: :destroy
 
   # Validations
   validates_presence_of :name, :last_name
+
+  ################
+  # User methods #
+  ################
+
 end
