@@ -7,9 +7,9 @@ class User < ActiveRecord::Base
   # Associations
   has_many :posts, dependent: :destroy
   has_many :requested_friendships, class_name: "Friendship", foreign_key: :requester_id, dependent: :destroy
-  has_many :friends, through: :requested_friendships, source: :requester
+  has_many :friends, through: :requested_friendships, source: :requestee
   has_many :received_friendships, class_name: "Friendship", foreign_key: :requestee_id, dependent: :destroy
-  has_many :received_friends, through: :received_friendships, source: :requestee
+  has_many :received_friends, through: :received_friendships, source: :requester
 
   # Validations
   validates_presence_of :name, :last_name
@@ -17,5 +17,70 @@ class User < ActiveRecord::Base
   ################
   # User methods #
   ################
+
+  def request_friendship(other_user)
+	# send friend request, no need to send friends: false, since default is set to false in the db
+	if good_to_go?(other_user)
+	  self.requested_friendships.create(requestee_id: other_user.id)
+	end
+  end
+
+  # True when friends = true, false otherwise
+  def has_friendship?(other_user)
+	!get_friendship(self, other_user).nil?
+  end
+
+  # When friends = false and a request has already been sent
+  def has_requested?(other_user)
+	!get_request(other_user, self).nil?
+  end
+
+  # current_user accepts a friend request from other_user
+  def accept_friend_request(other_user)
+	friendship = get_request(other_user, self)
+	if friendship
+	  friendship.update_attributes(friends: true)
+	end
+  end
+
+  # current_user rejects a friends request from other_user
+  def reject_friend_request(other_user)
+	friendship = get_request(other_user, self)
+	if friendship
+	  friendship.destroy
+	end
+  end
+
+  # Removes current relation between current_user and other_user
+  def delete_friendship(other_user)
+	if has_friendship?(other_user)
+	  get_friendship(self, other_user).destroy
+	end
+  end
+
+  # Returns ActiveRecord::Relation with all his friends(those with friends = true)
+  def get_all_friends
+	friends_requested_ids = "SELECT requestee_id FROM friendships WHERE requester_id = :user_id AND friends = true"
+	friends_received_ids  = "SELECT requester_id FROM friendships WHERE requestee_id = :user_id AND friends = true"
+	User.where("id IN (#{friends_requested_ids}) OR id IN (#{friends_received_ids})", user_id: self.id)
+  end
+
+  private
+
+	# Returns the request that `from` has made to `to`
+	def get_request(from, to)
+	  from.requested_friendships.find_by(requestee_id: to.id, friends: false)
+	end
+
+	# Returns an ActiveRecord::Relation[Friendship] with the current friendship if any
+	def get_friendship(current_user, other_user)
+	  current_user.requested_friendships.find_by(requestee_id: other_user.id, friends: true) ||
+		other_user.requested_friendships.find_by(requestee_id: current_user.id, friends: true)
+	end
+
+	# Check that current_user and other_user aren't friends and that friend requests haven't been sent
+	def good_to_go?(other_user)
+	  get_friendship(self,other_user).nil? && get_request(other_user, self).nil?
+	end
 
 end
