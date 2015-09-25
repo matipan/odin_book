@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :post do
-    body "MyText"
+    body "This is my first post, yeah!"
   end
 
 end
