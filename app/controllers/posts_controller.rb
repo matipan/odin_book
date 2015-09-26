@@ -11,7 +11,7 @@ class PostsController < ApplicationController
 	if @post.save
 	  flash[:success] = "Your post has been successfully posted."
 	end
-	redirect_to posts_path
+	redirect_to root_url
   end
 
   private

@@ -65,6 +65,13 @@ class User < ActiveRecord::Base
 	User.where("id IN (#{friends_requested_ids}) OR id IN (#{friends_received_ids})", user_id: self.id)
   end
 
+  # Returns the feed of the current user
+  def feed
+	friends_requested_ids = "SELECT requestee_id FROM friendships WHERE requester_id = :user_id AND friends = true"
+	friends_received_ids  = "SELECT requester_id FROM friendships WHERE requestee_id = :user_id AND friends = true"
+	Post.where("user_id IN (#{friends_requested_ids}) OR user_id in (#{friends_received_ids}) OR user_id = :user_id", user_id: self.id).order(created_at: :desc)
+  end
+
   private
 
 	# Returns the request that `from` has made to `to`

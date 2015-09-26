@@ -20,7 +20,7 @@ html{
   background-color: #e9eaed;
 }
 
-/* Navigation bar */ 
+/* Navigation bar */
 .navigation-bar{
   background-color: $facebook;
   padding-top: 1.0em;
@@ -127,10 +127,10 @@ html{
 	font-weight: 500;
 	a{
 	  color: $facebook;
-	  text-decoration: none;
+	  // text-decoration: none;
 	  &:hover{
-		text-decoration: none;
-		color: $light;
+		// text-decoration: none;
+		// color: $light;
 		background: inherit;
 	  }
 	}
@@ -184,3 +184,65 @@ span.picture {
 	}
   }
 }
+.create-post-box{
+  background: #ffffff;
+  max-width: 550px;
+  max-height: 100%;
+  margin: 10px auto;
+  padding: .3em 1em;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  hr{
+	margin-top: 8px;
+  }
+  .pull-left{
+	padding-top: 6px;
+	a{
+	  font-size: 14px;
+	  color: $light;
+	  text-decoration: none;
+	  &:hover{
+		color: $facebook;
+		text-decoration: none;
+		background: inherit;
+	  }
+	}
+  }
+}
+.update-status{
+  font-size: 15px;
+  i{
+	color: $facebook;
+	font-size: 22px;
+	margin-bottom: 0px;
+  }
+}
+.form-control-mine{
+  margin-bottom: 5px;
+  border: 0;
+  width: 100%;
+  max-width: 530px;
+}
+textarea:hover,
+input:hover,
+textarea:active,
+input:active,
+textarea:focus,
+input:focus,
+{
+    outline:0px !important;
+    -webkit-appearance:none;
+}
+textarea{
+  resize: none;
+  font-size: 14px;
+}
+.btn{
+  padding: 1px 30px;
+  -webkit-border-radius: 1px;
+  -moz-border-radius: 1px;
+  border-radius: 1px;
+  margin: 5px;
+}
+
