@@ -16,18 +16,21 @@ RSpec.describe User, type: :model do
 	  it 'sends a friend request' do
 		@other_user.request_friendship(@matias)
 		expect(@matias.received_friendships.count).to be == 1
+		expect(@matias.notifications.count).to be == 1
 	  end
 
 	  it 'accepts a friend request / #get_all_friends' do
 		@other_user.request_friendship(@matias)
 		@matias.accept_friend_request(@other_user)
 		expect(@matias.get_all_friends.count).to be == 1
+		expect(@matias.notifications.count).to be == 1
 	  end
 
 	  it 'accepts a friend request / #has_friendship?' do
 		@other_user.request_friendship(@matias)
 		@matias.accept_friend_request(@other_user)
 		expect(@matias.has_friendship?(@other_user)).to be true
+		expect(@matias.notifications.count).to be == 1
 	  end
 
 	  it 'rejects a friend request / #reject_friend_request' do

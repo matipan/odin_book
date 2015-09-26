@@ -10,6 +10,8 @@ class User < ActiveRecord::Base
   has_many :friends, through: :requested_friendships, source: :requestee
   has_many :received_friendships, class_name: "Friendship", foreign_key: :requestee_id, dependent: :destroy
   has_many :received_friends, through: :received_friendships, source: :requester
+  has_many :notifications, dependent: :destroy, foreign_key: :user_id
+  has_many :sent_notifications, class_name: "Notification", dependent: :destroy, foreign_key: :sender_id
 
   # Validations
   validates_presence_of :name, :last_name
@@ -21,7 +23,8 @@ class User < ActiveRecord::Base
   def request_friendship(other_user)
 	# send friend request, no need to send friends: false, since default is set to false in the db
 	if good_to_go?(other_user)
-	  self.requested_friendships.create(requestee_id: other_user.id)
+	  self.requested_friendships.create(requestee_id: other_user.id) if good_to_go?(other_user)
+	  other_user.notifications.create(sender_id: self.id, title: "request", message: "#{self.name.capitalize} #{self.last_name.capitalize} wants to be friends with you.")
 	end
   end
 
@@ -40,22 +43,19 @@ class User < ActiveRecord::Base
 	friendship = get_request(other_user, self)
 	if friendship
 	  friendship.update_attributes(friends: true)
+	  other_user.notifications.create(sender_id: self.id, title: "accept_request", message: "You are now friends with #{self.name.capitalize} #{self.last_name.capitalize}.")
 	end
   end
 
   # current_user rejects a friends request from other_user
   def reject_friend_request(other_user)
 	friendship = get_request(other_user, self)
-	if friendship
-	  friendship.destroy
-	end
+	friendship.destroy if friendship
   end
 
   # Removes current relation between current_user and other_user
   def delete_friendship(other_user)
-	if has_friendship?(other_user)
-	  get_friendship(self, other_user).destroy
-	end
+	get_friendship(self, other_user).destroy if has_friendship?(other_user)
   end
 
   # Returns ActiveRecord::Relation with all his friends(those with friends = true)
