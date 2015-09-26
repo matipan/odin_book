@@ -16,7 +16,11 @@ $light-grey: #F8F8F8;
 $twitter: #55acee;
 $github: #333333;
 $facebook: #3b5998;
+html{
+  background-color: #e9eaed;
+}
 
+/* Navigation bar */ 
 .navigation-bar{
   background-color: $facebook;
   padding-top: 1.0em;
@@ -94,6 +98,89 @@ $facebook: #3b5998;
 	  &:visited{
 		text-decoration: none;
 	  }
+	}
+  }
+}
+
+.clear-top{
+  margin-top: 15px;
+}
+
+/* posts */
+.posts{
+  list-style:none;
+  padding: 0;
+  li{
+	padding: 10px 5px;
+	// border-top: 1px solid #e8e8e8;
+	background-color: #ffffff;
+	margin: 5px auto;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	max-width: 550px;
+	max-height: 100%;
+  }
+  .user{
+	padding-top: 5px;
+	font-size: 30px;
+	font-weight: 500;
+	a{
+	  color: $facebook;
+	  text-decoration: none;
+	  &:hover{
+		text-decoration: none;
+		color: $light;
+		background: inherit;
+	  }
+	}
+  }
+  .content{
+	display: block;
+	font-size: 14px;
+	font-weight: normal;
+	line-height: 1.38;
+	img{
+	  display: block;
+	  padding: 5px 0;
+	}
+  }
+  .timestamp{
+	color: $gray-light;
+	display: block;
+	margin-left: 60px;
+  }
+  .gravatar{
+	float: left;
+	margin-right: 10px;
+  }
+}
+
+aside {
+  textarea {
+    height: 100px;
+    margin-bottom: 5px;
+  }
+}
+
+span.picture {
+  margin-top: 10px;
+  input {
+    border: 0;
+  }
+}
+
+.full-line{
+  margin-bottom: 5px;
+}
+.bottom-links{
+  a{
+	margin-right: 15px;
+	color: $light;
+	&:hover{
+	  color: $facebook;
+	  // text-decoration: none;
+	  background: inherit;
 	}
   }
 }

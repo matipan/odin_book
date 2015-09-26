@@ -29,5 +29,6 @@
                 %a(href="#") Option
               %li
                 %a(href="#") Option
+                = link_to "Sign out", destroy_user_session_path, method: :delete
       - else
         %a(href="#") Welcome!
