@@ -9,39 +9,12 @@
         = form_for(@post) do |f|
           = f.text_area :body, class: 'form-control-mine', placeholder: "What are you thinking?", rows: "3"
           %hr.full-line
-
           .pull-left
             %span
               %a(href="#")
                 %i.fa.fa-camera
-
           .pull-right
             = f.submit "Post", class: 'btn btn-primary'
-
     .posts
-      - @feed.each do |post|
-        .row
-          %li{:id => "post-#{post.id}"}
-            = link_to gravatar_for(post.user, size: 50), "#"
-            %span.user
-              = link_to "#{post.user.name.capitalize} #{post.user.last_name.capitalize}", "#"
-            %span.timestamp
-              %i.fa.fa-clock-o
-              Posted #{time_ago_in_words(post.created_at)} ago.
-              - if current_user == post.user
-                = link_to "delete", post, method: :delete, |
-                  data: { confirm: "You sure?" }           |
-            %br
-            %span.content
-              = post.body
-            %hr.full-line
-            .bottom-links
-              %span
-                %a(href="#")
-                  %i.fa.fa-thumbs-o-up
-                  Like
-              %span
-                %a(href="#")
-                  %i.fa.fa-comment-o
-                  Comment
+      = render "shared/feed"
 
