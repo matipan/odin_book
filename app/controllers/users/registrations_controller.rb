@@ -1,10 +1,9 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   before_filter :configure_sign_up_params, only: [:create]
   before_filter :configure_account_update_params, only: [:update]
-  skip_before_action :require_login, only: [ :new, :create ]
+  skip_before_action :require_login, only: [ :new, :create , :edit, :update ]
 
   def new
-	redirect_to posts_path if user_signed_in?
 	super
   end
 
