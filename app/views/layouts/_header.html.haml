@@ -23,7 +23,7 @@
               - if current_user.notifications.any?
                 - current_user.notifications.each do |notification|
                   %li
-                    = link_to "#{notification.message}", "#"
+                    = link_to "#{notification.message}", notification_path(notification), method: :delete
               - else
                 %li
                   = link_to "You don't have notifications", "#"
