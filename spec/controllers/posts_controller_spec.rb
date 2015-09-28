@@ -11,14 +11,14 @@ RSpec.describe PostsController, type: :controller do
 	describe "#create" do
 	  subject { post :create, post: { body: "Hello TOP's" } }
 
-	  it 'redirects to index after successfull creation' do
-		expect(subject).to redirect_to action: :index
+	  it 'redirects to home after successfull creation' do
+		expect(subject).to redirect_to root_url
 	  end
 
 	  subject { post :create, post: { body: "" } }
 
-	  it 'redirects to index after failed created post' do
-		expect(subject).to redirect_to action: :index
+	  it 'redirects to home after failed created post' do
+		expect(subject).to redirect_to root_url
 	  end
 	end
   end
