@@ -15,9 +15,18 @@
     .navigation-links.pull-right
       - if user_signed_in?
         %ul.right-menu
-          %li
-            %a(href="#")
+          %li.dropdown
+            %a.dropdown-toggle(data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" href="#")
               %i.fa.fa-flag
+              %i.fa.fa-caret-down
+            %ul.dropdown-menu.pull-right
+              - if current_user.notifications.any?
+                - current_user.notifications.each do |notification|
+                  %li
+                    = link_to "#{notification.message}", "#"
+              - else
+                %li
+                  = link_to "You don't have notifications", "#"
           %li.dropdown
             %a.dropdown-toggle(data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" href="#")
               %i.fa.fa-user
