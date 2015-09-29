@@ -1,0 +1,5 @@
+#remove_friendship_form
+  = form_for(current_user.get_relationship(@user), html: { method: :delete , remote: true}) do |f|
+    .hidden
+      = hidden_field_tag :other_user_id, @user.id
+    = f.submit message, class: "btn btn-danger"

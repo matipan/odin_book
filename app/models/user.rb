@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+	:recoverable, :rememberable, :trackable, :validatable
 
   # Associations
   has_many :posts, dependent: :destroy
@@ -24,7 +24,9 @@ class User < ActiveRecord::Base
 	# send friend request, no need to send friends: false, since default is set to false in the db
 	if good_to_go?(other_user)
 	  self.requested_friendships.create(requestee_id: other_user.id) if good_to_go?(other_user)
-	  other_user.notifications.create(sender_id: self.id, title: "request", message: "#{self.name.capitalize} #{self.last_name.capitalize} wants to be friends with you.")
+	  if !other_user.notifications.where(sender_id: self.id, title: "request", message: "#{self.name.capitalize} #{self.last_name.capitalize} wants to be friends with you.").any?
+		other_user.notifications.create(sender_id: self.id, title: "request", message: "#{self.name.capitalize} #{self.last_name.capitalize} wants to be friends with you.")
+	  end
 	end
   end
 
@@ -36,6 +38,29 @@ class User < ActiveRecord::Base
   # When friends = false and a request has already been sent
   def has_requested?(other_user)
 	!get_request(other_user, self).nil?
+  end
+
+  # Returns true when current user requested the friendship
+  def requested_to?(other_user)
+	has_requested?(other_user) && get_request(other_user, self).requester == self ? true : false
+  end
+
+  # Status of relationship
+  def status(other_user)
+	if has_friendship?(other_user)
+	  return "friends"
+	elsif has_requested?(other_user)
+	  if requested_to?(other_user)
+		return 'i_requested'
+	  else
+		return 'i_received'
+	  end
+	end
+  end
+
+  # Returns the relationship, a Friendship object
+  def get_relationship(other_user)
+	get_request(other_user,self).nil? ? get_friendship(self,other_user) : get_request(other_user,self)
   end
 
   # current_user accepts a friend request from other_user
@@ -76,7 +101,8 @@ class User < ActiveRecord::Base
 
 	# Returns the request that `from` has made to `to`
 	def get_request(from, to)
-	  from.requested_friendships.find_by(requestee_id: to.id, friends: false)
+	  from.requested_friendships.find_by(requestee_id: to.id, friends: false) ||
+		to.requested_friendships.find_by(requestee_id: from.id, friends: false)
 	end
 
 	# Returns an ActiveRecord::Relation[Friendship] with the current friendship if any

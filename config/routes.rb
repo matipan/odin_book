@@ -3,5 +3,6 @@ Rails.application.routes.draw do
   resources :posts
   resources :users, only: [ :show ]
   resources :notifications, only: [ :destroy, :index ]
+  resources :friendships, only: [ :create, :update, :destroy ]
   root "static_pages#home"
 end

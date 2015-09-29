@@ -1,0 +1,5 @@
+#send_request_form
+  = form_for(current_user.requested_friendships.build, html: { remote: true }) do |f|
+    .hidden
+      = hidden_field_tag :requestee_id, @user.id
+    = f.submit "Add friend", class: "btn btn-primary"

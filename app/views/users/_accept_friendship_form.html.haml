@@ -1,0 +1,5 @@
+#accept_friendship_form
+  = form_for(current_user.get_relationship(@user), html: { method: :patch , remote: true }) do |f|
+    .hidden
+      = hidden_field_tag :other_user_id, @user.id
+    = f.submit message, class: "btn btn-success"
