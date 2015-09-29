@@ -1,7 +1,4 @@
 class PostsController < ApplicationController
-  def index
-  end
-
   def new
 	@post = current_user.posts.build
   end
@@ -14,9 +11,17 @@ class PostsController < ApplicationController
 	redirect_to root_url
   end
 
+  def destroy
+	@post = Post.find(params[:id])
+	if @post.destroy
+	  redirect_to root_url
+	end
+  end
+
   private
 
 	def post_params
 	  params.require(:post).permit(:body, :user_id)
 	end
+
 end
