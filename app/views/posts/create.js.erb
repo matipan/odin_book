@@ -1,2 +1,2 @@
-$('.posts').prepend('<div class="row"> <%= j render @post %> </div>');
+$('<div class="row"> <%= j render @post %> </div>').hide().prependTo('.posts').fadeIn(500);
 $('#post-body').val('');

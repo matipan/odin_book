@@ -6,6 +6,9 @@
           %i.fa.fa-pencil-square
           Update your status
         %hr
+        - if @post.errors.any?
+          - @post.errors.full_messages do |msg|
+            .alert-alert-info= msg
         = form_for(@post, remote: true) do |f|
           = f.text_area :body, class: 'form-control-mine', placeholder: "What are you thinking?", rows: "3", id: "post-body"
           %hr.full-line

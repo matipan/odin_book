@@ -1,1 +1,1 @@
-$('#post-<%= @post.id %>').remove();
+$('#post-<%= @post.id %>').fadeOut(400, function(){ $(this).remove(); });
