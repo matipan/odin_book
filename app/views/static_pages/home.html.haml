@@ -7,7 +7,7 @@
           Update your status
         %hr
         = form_for(@post, remote: true) do |f|
-          = f.text_area :body, class: 'form-control-mine', placeholder: "What are you thinking?", rows: "3"
+          = f.text_area :body, class: 'form-control-mine', placeholder: "What are you thinking?", rows: "3", id: "post-body"
           %hr.full-line
           .pull-left
             %span

@@ -22,8 +22,11 @@ class PostsController < ApplicationController
 
   def destroy
 	@post = Post.find(params[:id])
-	if @post.destroy
-	  redirect_to root_url
+	respond_to do |format|
+	  if @post.destroy
+		format.html { redirect_to root_url }
+		format.js {}
+	  end
 	end
   end
 
