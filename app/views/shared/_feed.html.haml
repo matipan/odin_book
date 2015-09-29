@@ -8,8 +8,7 @@
         %i.fa.fa-clock-o
         Posted #{time_ago_in_words(post.created_at)} ago.
         - if current_user == post.user
-          = link_to "delete", post, method: :delete, |
-            data: { confirm: "You sure?" }           |
+          = link_to "delete", post, method: :delete
       %br
       %span.content
         = post.body

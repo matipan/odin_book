@@ -7,10 +7,14 @@ class PostsController < ApplicationController
 
   def create
 	@post = current_user.posts.build(post_params)
-	if @post.save
-	  flash[:success] = "Your post has been successfully posted."
+	respond_to do |format|
+	  if @post.save
+		format.js {}
+		format.html { redirect_to root_url }
+		format.json { render 'static_pages/home', status: :created }
+	  end
 	end
-	redirect_to root_url
+	# redirect_to root_url
   end
 
   def destroy
