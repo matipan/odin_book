@@ -11,18 +11,18 @@ RSpec.describe PostsController, type: :controller do
 
   context 'Creating a post' do
 	describe "#create" do
-	  subject { post :create, post: { body: "Hello TOP's" } }
+	  subject { post :create, post: { body: "Hello TOP's" }, format: :json }
 
 	  it 'redirects to home after successfull creation, count up by one' do
-		expect(subject).to redirect_to root_url
+		expect(subject.status).to eq(422)
 		expect{  post :create, post: { body: "Hello TOP's" } }.to change(Post, :count).by(+1)
 	  end
 
-	  subject { post :create, post: { body: "" } }
+	  subject { post :create, post: { body: "" }, format: :json }
 
 	  it 'redirects to home after failed created post, count doesn\'t change' do
-		expect(subject).to redirect_to root_url
-		expect{  post :create, post: { body: "" } }.to change(Post, :count).by(0)
+		expect(subject.status).to eq(422)
+		expect{  post :create, post: { body: "" }, format: :json }.to change(Post, :count).by(0)
 	  end
 	end
 
