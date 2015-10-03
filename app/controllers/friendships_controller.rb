@@ -20,7 +20,6 @@ class FriendshipsController < ApplicationController
   end
 
   def destroy
-	# @relationship = current_user.get_relationship(User.find(@other_user_id))
 	@user = User.find(params[:other_user_id])
 	@relationship = Friendship.find(params[:id])
 	respond_to do |format|

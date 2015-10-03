@@ -4,6 +4,7 @@ FactoryGirl.define do
 	last_name "Pan"
 	email "matias@valid.com"
 	password "password"
+	id 1
   end
 
   factory :second_user, class: User do
@@ -11,6 +12,7 @@ FactoryGirl.define do
 	last_name "User"
 	email "second@valid.com"
 	password "password"
+	id 2
   end
 
 end
