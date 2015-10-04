@@ -8,18 +8,23 @@ RSpec.describe PostsController, type: :controller do
   end
 
   describe "#create" do
-	subject { post :create, post: { body: "Hello TOP's" }, format: :json }
+	context 'when a user submits a valid post' do
+	  subject { post :create, post: { body: "Hello TOP's" }, format: :js }
 
-	it 'redirects to home after successfull creation, count up by one' do
-	  expect(subject.status).to eq(422)
-	  expect{  post :create, post: { body: "Hello TOP's" } }.to change(Post, :count).by(+1)
+	  it 'redirecs to home with the count up by one' do
+		expect(subject.status).to eq(200)
+		expect{ post :create, post: { body: "Hello TOP's" }, format: :js }.to change(Post, :count).by(+1)
+	  end
 	end
 
-	subject { post :create, post: { body: "" }, format: :json }
+	context 'when a user submits an invalid post' do
+	  subject { post :create, post: { body: "" }, format: :js }
 
-	it 'redirects to home after failed created post, count doesn\'t change' do
-	  expect(subject.status).to eq(422)
-	  expect{  post :create, post: { body: "" }, format: :json }.to change(Post, :count).by(0)
+	  it 'redirects to home with count unchanged' do
+		expect(subject.status).to eq(200)
+		expect{subject}.to change(Post, :count).by(0)
+	  end
+
 	end
   end
 
@@ -29,10 +34,13 @@ RSpec.describe PostsController, type: :controller do
 	  matias.posts.create(body: "Hello world")
 	end
 
-	subject { delete :destroy , id: matias.posts.last }
-	it 'redirects to home after successfully destroyed a post, count down by one' do
-	  expect(subject).to redirect_to root_url
-	  expect{ delete :destroy, :id => matias.posts.last }.to change(Post, :count).by(-1)
+	context 'when a user destroys a post' do
+	  subject { delete :destroy , id: matias.posts.last }
+
+	  it 'redirects to home with count down by one' do
+		expect(subject).to redirect_to root_url
+		expect{ delete :destroy, :id => matias.posts.last }.to change(Post, :count).by(-1)
+	  end
 	end
   end
 end
