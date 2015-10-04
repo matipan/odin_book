@@ -6,9 +6,8 @@ class Post < ActiveRecord::Base
   has_many :likes
 
   # Validations
-  validates_presence_of :body
-  validates_presence_of :user_id
+  validates_presence_of :body, :user_id
   validates_attachment_content_type :post_image, content_type: /\Aimage\/.*\Z/
-  validates :body, length: { maximum: 1000 }
+  validates :body, length: { minimum: 2, maximum: 1000 }
 
 end
