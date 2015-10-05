@@ -25,6 +25,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.3.3'
   gem 'guard-rspec', require: false
   gem 'terminal-notifier-guard', '~> 1.6.1'
+  gem 'database_cleaner', '1.3.0'
 end
 
 group :test do
