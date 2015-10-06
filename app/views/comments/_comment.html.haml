@@ -1,0 +1,11 @@
+%div{ id: "comment-#{@comment.id}" }
+  .comment
+    .clearfix
+      .pull-left
+        %p.com-author
+          = link_to "#{@comment.user.name.capitalize} #{@comment.user.last_name.capitalize} said: ", @comment.user
+      .pull-right
+        - if current_user == @comment.user
+          = link_to "delete", @comment, method: :delete, remote: true
+    %p.com-body
+      = @comment.body
