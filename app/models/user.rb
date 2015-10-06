@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
   has_many :notifications, dependent: :destroy, foreign_key: :user_id
   has_many :sent_notifications, class_name: "Notification", dependent: :destroy, foreign_key: :sender_id
   has_many :likes, dependent: :destroy
+  has_many :comments, dependent: :destroy
 
   # Validations
   validates_presence_of :name, :last_name
