@@ -113,10 +113,19 @@ body{
 .posts{
   list-style:none;
   padding: 0;
-  li{
-	padding: 10px 5px;
-	// border-top: 1px solid #e8e8e8;
+  .post{
 	background-color: #ffffff;
+	padding: 10px 5px;
+	-webkit-border-top-left-radius: 3px;
+	-webkit-border-top-right-radius: 3px;
+	-moz-border-radius-topleft: 3px;
+	-moz-border-radius-topright: 3px;
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
+	margin: 0px auto;
+  }
+  li{
+	// padding: 10px 5px;
 	margin: 5px auto;
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
@@ -130,10 +139,7 @@ body{
 	font-weight: 500;
 	a{
 	  color: $facebook;
-	  // text-decoration: none;
 	  &:hover{
-		// text-decoration: none;
-		// color: $light;
 		background: inherit;
 	  }
 	}
@@ -227,6 +233,22 @@ span.picture {
   width: 100%;
   max-width: 530px;
 }
+.form-control-mine-comment{
+  margin-bottom: 5px;
+  border: 0;
+  width: 100%;
+  max-width: 550px;
+}
+.comment-button{
+  .btn{
+	margin-top: 0px;
+  }
+}
+.comment-form{
+  background: #ffffff;
+  width: 100%;
+  max-width: 550px;
+}
 textarea:hover,
 input:hover,
 textarea:active,
@@ -249,3 +271,24 @@ textarea{
   margin: 5px;
 }
 
+#comments{
+  background-color: #CCCCFF;
+  padding: 10px 5px;
+  margin: 0 auto;
+  -webkit-border-bottom-right-radius: 3px;
+  -webkit-border-bottom-left-radius: 3px;
+  -moz-border-radius-bottomright: 3px;
+  -moz-border-radius-bottomleft: 3px;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+  max-width: 550px;
+  max-height: 100%;
+}
+.comment{
+  border-bottom: 1px solid $light;
+  .com-author{
+	margin-bottom: 1px;
+	color: #000000;
+	font-weight: 500;
+  }
+}

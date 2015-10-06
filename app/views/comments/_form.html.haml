@@ -1,0 +1,5 @@
+= form_for(object.comments.build, remote: true) do |f|
+  = f.text_area :body, class: 'form-control-mine-comment', placeholder: "Write a comment...", rows: "1"
+  .clearfix
+    .pull-right.comment-button
+      = f.submit "Comment", class: 'btn btn-primary'

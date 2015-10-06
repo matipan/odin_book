@@ -1,21 +1,38 @@
 - @feed.each do |post|
   .row
     %li{:id => "post-#{post.id}"}
-      = link_to gravatar_for(post.user, size: 50), post.user
-      %span.user
-        = link_to "#{post.user.name.capitalize} #{post.user.last_name.capitalize}", post.user
-      %span.timestamp
-        %i.fa.fa-clock-o
-        Posted #{time_ago_in_words(post.created_at)} ago.
-        - if current_user == post.user
-          = link_to "delete", post, method: :delete, remote: true
-      %br
-      %span.content
-        = post.body
-      %hr.full-line
-      .bottom-links
-        %span#like_form
-          - if post.liked_by?(current_user)
-            = render "likes/nope", object: post
-          - else
-            = render "likes/like", object: post
+      .post
+        = link_to gravatar_for(post.user, size: 50), post.user
+        %span.user
+          = link_to "#{post.user.name.capitalize} #{post.user.last_name.capitalize}", post.user
+        %span.timestamp
+          %i.fa.fa-clock-o
+          Posted #{time_ago_in_words(post.created_at)} ago.
+          - if current_user == post.user
+            = link_to "delete", post, method: :delete, remote: true
+        %br
+        %span.content
+          = post.body
+        %hr.full-line
+        .bottom-links
+          %span#like_form
+            - if post.liked_by?(current_user)
+              = render "likes/nope", object: post
+            - else
+              = render "likes/like", object: post
+      - if post.comments.any?
+        #comments
+          - post.comments.each do |comment|
+            %div{ id: "comment-#{post.id}" }
+              .comment
+                .clearfix
+                  .pull-left
+                    %p.com-author
+                      = link_to "#{comment.user.name.capitalize} #{comment.user.last_name.capitalize} said: ", comment.user
+                  .pull-right
+                    - if current_user == comment.user
+                      = link_to "delete", "#"
+                %p.com-body
+                  = comment.body
+      .comment-form
+        = render "comments/form", object: post
