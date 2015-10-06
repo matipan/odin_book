@@ -20,10 +20,10 @@
               = render "likes/nope", object: post
             - else
               = render "likes/like", object: post
-      - if post.comments.any?
-        #comments
+      #comments
+        - if post.comments.any?
           - post.comments.each do |comment|
-            %div{ id: "comment-#{post.id}" }
+            %div{ id: "comment-#{comment.id}" }
               .comment
                 .clearfix
                   .pull-left
@@ -31,7 +31,7 @@
                       = link_to "#{comment.user.name.capitalize} #{comment.user.last_name.capitalize} said: ", comment.user
                   .pull-right
                     - if current_user == comment.user
-                      = link_to "delete", "#"
+                      = link_to "delete", comment, method: :delete, remote: true
                 %p.com-body
                   = comment.body
       .comment-form
