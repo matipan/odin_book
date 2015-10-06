@@ -1,1 +1,1 @@
-$("#like_form").empty().append("<%= j render 'likes/like', object: @post %>");
+$("#post-<%= @post.id %> #like_form").empty().append("<%= j render 'likes/like', object: @post %>");

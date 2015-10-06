@@ -12,11 +12,8 @@
     = @post.body
   %hr.full-line
   .bottom-links
-    %span
-      %a(href="#")
-        %i.fa.fa-thumbs-o-up
-        Like
-    %span
-      %a(href="#")
-        %i.fa.fa-comment-o
-        Comment
+    %span#like_form
+      - if post.liked_by?(current_user)
+        = render "likes/nope", object: post
+      - else
+        = render "likes/like", object: post

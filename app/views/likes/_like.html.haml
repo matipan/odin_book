@@ -1,4 +1,3 @@
-%i.fa.fa-thumbs-o-up
 = form_for(object.likes.build, html: { remote: true }) do |f|
   .hidden
     = hidden_field_tag :post_id, object.id
