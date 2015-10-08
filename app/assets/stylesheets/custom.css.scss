@@ -167,15 +167,15 @@ body{
 
 aside {
   textarea {
-    height: 100px;
-    margin-bottom: 5px;
+	height: 100px;
+	margin-bottom: 5px;
   }
 }
 
 span.picture {
   margin-top: 10px;
   input {
-    border: 0;
+	border: 0;
   }
 }
 
@@ -256,8 +256,8 @@ input:active,
 textarea:focus,
 input:focus,
 {
-    outline:0px !important;
-    -webkit-appearance:none;
+  outline:0px !important;
+  -webkit-appearance:none;
 }
 textarea{
   resize: none;
@@ -293,9 +293,37 @@ textarea{
   }
 }
 .user-profile{
-  background-color: #ffffff;
+  h2{
+	text-align: center;
+  }
+  .col-md-3{
+	background-color: #ffffff;
+  }
   padding: 10px 10px;
   -webkit-border-radius: 1px;
   -moz-border-radius: 1px;
   border-radius: 1px;
+  .post{
+	background-color: #ffffff;
+	padding: 10px 5px;
+	-webkit-border-top-left-radius: 3px;
+	-webkit-border-top-right-radius: 3px;
+	-moz-border-radius-topleft: 3px;
+	-moz-border-radius-topright: 3px;
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
+	margin: 0px auto;
+  }
+  .comment-form{
+	margin-bottom: 1.6em;
+  }
+  li{
+	list-style-type: none;
+	margin: 5px auto;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	max-width: 550px;
+	max-height: 100%;
+  }
 }

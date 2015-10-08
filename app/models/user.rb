@@ -22,6 +22,10 @@ class User < ActiveRecord::Base
   # User methods #
   ################
 
+  def full_name
+	"#{self.name} #{self.last_name}"
+  end
+
   def request_friendship(other_user)
 	# send friend request, no need to send friends: false, since default is set to false in the db
 	if good_to_go?(other_user)
