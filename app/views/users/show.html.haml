@@ -1,14 +1,19 @@
-= @user.name
-- if current_user != @user
-  - if user_signed_in?
-    #form
-      - case current_user.status(@user)
-        - when "friends"
-          = render partial: "remove_friendship_form", locals: { message: "Remove friendship" }
-        - when "i_requested"
-          = render partial: "remove_friendship_form", locals: { message: "Cancel request" }
-        - when "i_received"
-          = render partial: "accept_friendship_form", locals: { message: "Accept friendship" }
-          = render partial: "remove_friendship_form", locals: { message: "Decline request" }
-        - else
-          = render "send_request_form"
+.container.clear-top.user-profile
+  .row
+    .col-md-4
+      = gravatar_for(@user, { size: 187 })
+      = @user.name
+      - if current_user != @user
+        - if user_signed_in?
+          #form
+            - case current_user.status(@user)
+              - when "friends"
+                = render partial: "remove_friendship_form", locals: { message: "Remove friendship" }
+              - when "i_requested"
+                = render partial: "remove_friendship_form", locals: { message: "Cancel request" }
+              - when "i_received"
+                = render partial: "accept_friendship_form", locals: { message: "Accept friendship" }
+                = render partial: "remove_friendship_form", locals: { message: "Decline request" }
+              - else
+                = render "send_request_form"
+    .col-md-8
