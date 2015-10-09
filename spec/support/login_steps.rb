@@ -5,4 +5,9 @@ module LoginSteps
 	fill_in "user_password", with: user.password
 	click_button "Log in"
   end
+
+  def logout_to(user)
+	visit('/')
+	click_link "Sign out"
+  end
 end
