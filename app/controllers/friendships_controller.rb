@@ -4,6 +4,7 @@ class FriendshipsController < ApplicationController
 	@user = User.find(params[:requestee_id])
 	current_user.request_friendship(@user)
 	respond_to do |format|
+	  FriendshipMailer.requested_friendship(@user)
 	  format.html { redirect_to @user }
 	  format.js {}
 	end
