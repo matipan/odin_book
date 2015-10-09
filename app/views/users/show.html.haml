@@ -6,55 +6,9 @@
       %h4= @user.full_name
       - if current_user != @user
         - if user_signed_in?
-          #form
-            - case current_user.status(@user)
-              - when "friends"
-                = render partial: "remove_friendship_form", locals: { message: "Remove friendship" }
-              - when "i_requested"
-                = render partial: "remove_friendship_form", locals: { message: "Cancel request" }
-              - when "i_received"
-                = render partial: "accept_friendship_form", locals: { message: "Accept friendship" }
-                = render partial: "remove_friendship_form", locals: { message: "Decline request" }
-              - else
-                = render "send_request_form"
+          = render "friendship_button"
     .col-md-9
       %h2
         User timeline
       %ul
-      - @user.posts.each do |post|
-        %li{:id => "post-#{post.id}"}
-          .post
-            = link_to gravatar_for(post.user, size: 50), post.user
-            %span.user
-              = link_to "#{post.user.name.capitalize} #{post.user.last_name.capitalize}", post.user
-            %span.timestamp
-              %i.fa.fa-clock-o
-              Posted #{time_ago_in_words(post.created_at)} ago.
-              - if current_user == post.user
-                = link_to "delete", post, method: :delete, remote: true
-            %br
-            %span.content
-              = post.body
-            %hr.full-line
-            .bottom-links
-              %span#like_form
-                - if post.liked_by?(current_user)
-                  = render "likes/nope", object: post
-                - else
-                  = render "likes/like", object: post
-          #comments
-            - if post.comments.any?
-              - post.comments.each do |comment|
-                %div{ id: "comment-#{comment.id}" }
-                  .comment
-                    .clearfix
-                      .pull-left
-                        %p.com-author
-                          = link_to "#{comment.user.name.capitalize} #{comment.user.last_name.capitalize} said: ", comment.user
-                      .pull-right
-                        - if current_user == comment.user
-                          = link_to "delete", comment, method: :delete, remote: true
-                    %p.com-body
-                      = comment.body
-          .comment-form
-            = render "comments/form", object: post
+      = render "user_posts"
