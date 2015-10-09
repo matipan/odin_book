@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 	registrations: 'users/registrations'
   }
   resources :posts
-  resources :users, only: [ :show ] do
+  resources :users, only: [ :show , :index ] do
 	member do
 	  get :friends, :requests
 	end

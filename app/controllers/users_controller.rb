@@ -4,6 +4,10 @@ class UsersController < ApplicationController
   def show
   end
 
+  def index
+	@users = User.paginate(page: params[:page]).order(created_at: :desc)
+  end
+
   def friends
 	@friends = @user.get_all_friends
   end

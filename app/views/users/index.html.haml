@@ -2,8 +2,9 @@
   .col-md-6.col-md-offset-3
     .requests
       %h1 Friendship requests received
-      - @friends.each do |user|
+      - @users.each do |user|
         %h2
           %span
             = gravatar_for(user, { size: 80 })
           = link_to user.full_name, user_path(user)
+      = will_paginate @users, renderer: BootstrapPagination::Rails
