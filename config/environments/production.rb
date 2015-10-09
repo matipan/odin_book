@@ -16,7 +16,7 @@ Rails.application.configure do
 	port:                 587,
 	domain:               'https://polar-river-1192.herokuapp.com/',
 	user_name:            'odinbookmp@gmail.com',
-	password:             'odinbookmp',
+	password:             'odinbookmp26',
 	authentication:       'plain',
 	enable_starttls_auto: true  }
   config.i18n.fallbacks = true
