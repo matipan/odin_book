@@ -99,6 +99,12 @@ class User < ActiveRecord::Base
 	User.where("id IN (#{friends_requested_ids}) OR id IN (#{friends_received_ids})", user_id: self.id)
   end
 
+  # Returns ActiveRecord::Relation with all friendships requests(received not made)
+  def get_all_requests
+	friends_received_ids  = "SELECT requester_id FROM friendships WHERE requestee_id = :user_id AND friends = false"
+	User.where("id IN (#{friends_received_ids})", user_id: self.id)
+  end
+
   # Returns the feed of the current user
   def feed
 	friends_requested_ids = "SELECT requestee_id FROM friendships WHERE requester_id = :user_id AND friends = true"

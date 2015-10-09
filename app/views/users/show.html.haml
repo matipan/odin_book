@@ -7,6 +7,11 @@
       - if current_user != @user
         - if user_signed_in?
           = render "friendship_button"
+      - else
+        You have
+        = @user.get_all_requests.count
+        friendship requests
+      = render "user_stats"
     .col-md-9
       %h2
         User timeline
