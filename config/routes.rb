@@ -4,7 +4,11 @@ Rails.application.routes.draw do
 	registrations: 'users/registrations'
   }
   resources :posts
-  resources :users, only: [ :show ]
+  resources :users, only: [ :show ] do
+	member do
+	  get :friends, :requests
+	end
+  end
   resources :notifications, only: [ :destroy, :index ]
   resources :likes, only: [ :create, :destroy ]
   resources :comments, only: [ :create, :destroy, :update ]
