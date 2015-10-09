@@ -3,7 +3,7 @@
     .brand.pull-left
       %ul.left-menu
         %li.main-odin
-          %a(href="#")
+          %a(href= root_path)
             %i.fa.fa-facebook-official
         - if user_signed_in?
           %form(role="search")
@@ -33,11 +33,10 @@
               %i.fa.fa-caret-down
             %ul.dropdown-menu
               %li
-                %a(href="#") Option
+                = link_to "View profile", user_path(current_user)
               %li
-                %a(href="#") Option
+                = link_to "Edit profile", edit_user_registration_path
               %li
-                %a(href="#") Option
                 = link_to "Sign out", destroy_user_session_path, method: :delete
       - else
         %a(href="#") Welcome!
