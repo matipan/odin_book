@@ -1,4 +1,4 @@
-- @user.posts.each do |post|
+- @posts.each do |post|
   %li{:id => "post-#{post.id}"}
     .post
       = link_to gravatar_for(post.user, size: 50), post.user

@@ -18,3 +18,4 @@
         User timeline
       %ul
       = render "user_posts"
+      = will_paginate @posts, renderer: BootstrapPagination::Rails

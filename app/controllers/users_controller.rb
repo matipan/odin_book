@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   before_action :find_user, only: [ :show, :friends, :requests ]
 
   def show
+	@posts = @user.posts.paginate(page: params[:page], per_page: 15)
   end
 
   def index

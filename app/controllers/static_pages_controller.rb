@@ -3,7 +3,7 @@ class StaticPagesController < ApplicationController
 
   def home
 	@post = current_user.posts.build
-	@feed = current_user.feed
+	@feed = current_user.feed.paginate(page: params[:page], per_page: 30)
   end
 
 end

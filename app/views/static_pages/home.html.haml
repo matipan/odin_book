@@ -20,4 +20,5 @@
             = f.submit "Post", class: 'btn btn-primary'
     .posts
       = render "shared/feed"
+      = will_paginate @feed, renderer: BootstrapPagination::Rails
 
